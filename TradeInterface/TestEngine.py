@@ -2,8 +2,8 @@
 
 import datetime
 import json
-from HistoryTrading import HistoryTrading
-from RealTimeTrading import RealTimeTrading
+from .HistoryTrading import HistoryTrading
+from .RealTimeTrading import RealTimeTrading
 
 '''装饰器'''
 
