@@ -19,7 +19,7 @@ setup(
     description="a interface of simulate-trading stocks",
     long_description="a interface of simulate-trading stocks",
     license="MIT Licence",
-    url="https://github.com/Inistlwq/TradeInterface",
+    url="https://github.com/RManOfCN/TradeInterface.git",
     author="Raymond Luo",
     author_email="luolinhao1998@gmail.com",
 
