@@ -8,9 +8,6 @@ import hashlib
 import sys
 import importlib,sys
 
-if sys.getdefaultencoding() != 'utf-8':
-    importlib.reload(sys)
-    sys.setdefaultencoding('utf-8')
 
 
 class RealTimeTrading(object):
