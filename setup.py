@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 
 #############################################
 # File Name: setup.py
@@ -12,18 +12,18 @@
 from setuptools import setup, find_packages
 
 setup(
-    name = "TradeInterface",
-	py_modules = ['TradeInterface'],
-    version = "0.2.7",
-    keywords = ("pip", "TradeInterface","trade",'haizhi'),
-    description = "a interface of simulate-trading stocks",
-    long_description = "a interface of simulate-trading stocks",
-    license = "MIT Licence",
-    url = "https://github.com/Inistlwq/TradeInterface",
-    author = "cb_Lian",
-    author_email = "787162506@qq.com",
+    name="TradeInterface",
+    py_modules=['TradeInterface'],
+    version="0.2.9",
+    keywords=("pip", "TradeInterface", "trade", 'haizhi'),
+    description="a interface of simulate-trading stocks",
+    long_description="a interface of simulate-trading stocks",
+    license="MIT Licence",
+    url="https://github.com/Inistlwq/TradeInterface",
+    author="Raymond Luo",
+    author_email="luolinhao1998@gmail.com",
 
-    packages = find_packages(),
-    include_package_data = True,
-    platforms = "any"
+    packages=find_packages(),
+    include_package_data=True,
+    platforms="any"
 )

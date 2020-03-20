@@ -1,37 +1,43 @@
-#coding:utf-8
+# coding:utf-8
 from TradeInterface import TestEngine
 import datetime
 import json
 
 '''实盘交易引擎示例'''
-user_id ='18126352115'
+user_id = '18126352115'
 password = 'Cloud25683'
+
+
 def Realtime():
     '''
     实盘交易引擎
     :return:
     '''
-    Engine = TestEngine(user_id=user_id,password=password,type='RealTimeTrading')
-    print Engine.core
-    print Engine.current_time
-    #print Engine.buy(code='600848',volume=100)
-    #print Engine.sell(code='600848', volume=100)
+    Engine = TestEngine(user_id=user_id, password=password, type='RealTimeTrading')
+    print(Engine.core)
+    print(Engine.current_time)
+    # print Engine.buy(code='600848',volume=100)
+    # print Engine.sell(code='600848', volume=100)
     temp = Engine.query_records(start="2018-04-25", end="2018-04-26")
-    print len(temp)
-    print temp[0]['pre_id']
-    print Engine.cancel_order(str(temp[0]['pre_id']))
-    print Engine.query_history_records(start="2018-4-4", end="2018-04-05")
-    print Engine.query_profit()
+    print(len(temp))
+    print(temp[0]['pre_id'])
+    print(Engine.cancel_order(str(temp[0]['pre_id'])))
+    print(Engine.query_history_records(start="2018-4-4", end="2018-04-05"))
+    print(Engine.query_profit())
+
+
 '''历史回测引擎示例'''
+
+
 def History():
     '''
     历史回测引擎
     :return:
     '''
-    Engine = TestEngine(user_id=user_id,password=password,type='HistoryTrading')
-    print Engine.core
-    print Engine.current_time
-    print Engine.list_stratagy()
+    Engine = TestEngine(user_id=user_id, password=password, type='HistoryTrading')
+    print(Engine.core)
+    print(Engine.current_time)
+    print(Engine.list_stratagy())
     if Engine.list_stratagy():
         Engine.del_stratagy(Engine.list_stratagy()[0]['strategy_name'])
         Engine.create_stratagy(user_id)
@@ -39,16 +45,16 @@ def History():
     else:
         Engine.create_stratagy(user_id)
         Engine.set_stratagy(user_id)
-    print Engine.buy(code =600848,volume=1000,date = '2017-10-11')
+    print(Engine.buy(code=600848, volume=1000, date='2017-10-11'))
     Engine.current_time = '2018-4-8'
     Engine.shift_current_time(1)
-    print Engine.current_time
-    print Engine.sell(code='600848',volume=100)
-    print Engine.history_to_csv('data')
+    print(Engine.current_time)
+    print(Engine.sell(code='600848', volume=100))
+    print(Engine.history_to_csv('data'))
 
 
 if __name__ == '__main__':
-    #Realtime()
+    # Realtime()
     History()
 '''
 Engine.shift_current_time(-20)
@@ -70,5 +76,3 @@ print Engine.sell(code =600848,volume=100)
 #print type(Engine.current_time)
 #print Engine.shift_current_time(1)
 '''
-
-

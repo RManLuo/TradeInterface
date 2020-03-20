@@ -2,7 +2,7 @@
 import os
 import time
 import json
-import urllib2
+import urllib.request
 import urllib
 import hashlib
 import sys
@@ -167,7 +167,7 @@ class HistoryTrading(object):
     def md5encryption(password):
         if password.strip() != '':
             md = hashlib.md5()
-            md.update(password)
+            md.update(password.encode("utf8"))
             return md.hexdigest()
         else:
             return ''
@@ -176,8 +176,8 @@ class HistoryTrading(object):
     @staticmethod
     def http_post(send_dic, urlencode_name, url):
         jdata = json.dumps(send_dic)  # json格式化编码
-        jdata = urllib.urlencode({urlencode_name: jdata})  # urlencode编码
-        req = urllib2.Request(url, jdata)  # 生成页面请求的完整数据
-        res = urllib2.urlopen(req)  # 发送页面请求
+        jdata = urllib.parse.urlencode({urlencode_name: jdata}).encode(encoding='UTF8')  # urlencode编码
+        req = urllib.request.Request(url, jdata)  # 生成页面请求的完整数据
+        res = urllib.request.urlopen(req)  # 发送页面请求
         temp_res = res.read()  # 返回结果，把list结果处理为字符串显示
         return temp_res

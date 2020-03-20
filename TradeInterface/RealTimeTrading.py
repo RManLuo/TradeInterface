@@ -2,14 +2,14 @@
 import os
 import time
 import json
-import urllib2
+import urllib.request
 import urllib
 import hashlib
 import sys
-import pandas as pd
+import importlib,sys
 
 if sys.getdefaultencoding() != 'utf-8':
-    reload(sys)
+    importlib.reload(sys)
     sys.setdefaultencoding('utf-8')
 
 
@@ -107,7 +107,7 @@ class RealTimeTrading(object):
     def md5encryption(password):
         if password.strip() != '':
             md = hashlib.md5()
-            md.update(password)
+            md.update(password.encode("utf8"))
             return md.hexdigest()
         else:
             return ''
@@ -118,9 +118,9 @@ class RealTimeTrading(object):
         jdata = json.dumps(send_dic)  # json格式化编码
         # print(jdata)
         # exit()
-        jdata = urllib.urlencode({urlencode_name: jdata})  # urlencode编码
-        req = urllib2.Request(url, jdata)  # 生成页面请求的完整数据
-        res = urllib2.urlopen(req)  # 发送页面请求
+        jdata = urllib.parse.urlencode({urlencode_name: jdata}).encode(encoding='UTF8')  # urlencode编码
+        req = urllib.request.Request(url, jdata)  # 生成页面请求的完整数据
+        res = urllib.request.urlopen(req)  # 发送页面请求
         temp_res = res.read()  # 返回结果，把list结果处理为字符串显示
         return temp_res
 

@@ -1,7 +1,8 @@
 #coding:utf-8
-import sys
+import importlib,sys
+
 if sys.getdefaultencoding() != 'utf-8':
-    reload(sys)
+    importlib.reload(sys)
     sys.setdefaultencoding('utf-8')
 
 from HistoryTrading import HistoryTrading

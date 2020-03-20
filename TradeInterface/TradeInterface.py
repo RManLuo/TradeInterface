@@ -11,13 +11,14 @@
 import os
 import time
 import json
-import urllib2
+import urllib.request
 import urllib
 import hashlib
 import sys
 import pandas as pd
+import importlib,sys
 if sys.getdefaultencoding() != 'utf-8':
-    reload(sys)
+    importlib.reload(sys)
     sys.setdefaultencoding('utf-8')
 
 
@@ -126,9 +127,9 @@ class Trade:
         jdata = json.dumps(send_dic)  # json格式化编码
         # print(jdata)
         # exit()
-        jdata = urllib.urlencode({urlencode_name: jdata})  # urlencode编码
-        req = urllib2.Request(url, jdata)  # 生成页面请求的完整数据
-        res = urllib2.urlopen(req)  # 发送页面请求
+        jdata = urllib.parse.urlencode({urlencode_name: jdata})  # urlencode编码
+        req = urllib.request.Request(url, jdata)  # 生成页面请求的完整数据
+        res = urllib.request.urlopen(req)  # 发送页面请求
         temp_res = res.read()  # 返回结果，把list结果处理为字符串显示
         return temp_res
 
@@ -159,7 +160,7 @@ class BackTestTrade:
         self.stock_encode_name = 'tradeinfo'
         self.query_pro_encode_name = 'query_info'
         self.cancel_encode_name = 'cancel_info'
-        self.send_dic = {'userid': '', 'password': '', 'buy_sell_type': '', 'strategy_name': '',  'stock_dic': {}}
+        self.send_dic = {'userid': '', 'password': '', 'buy_sell_type': '', 'strategy_name': '', 'stock_dic': {}}
         self.set_userid(userid)
         self.set_password(password)
         self.set_strategy_name(strategy_name)
@@ -203,7 +204,7 @@ class BackTestTrade:
         for idx in data.index:
             line = data.loc[idx]
             if line['trade_type'] == '3':  # 卖出成交量设为负
-                line['Volume'] = '-'+line['Volume']
+                line['Volume'] = '-' + line['Volume']
             if line['trade_type'] == '1':  # 买入发生金额设为负
                 line['hap_fund'] = '-' + line['hap_fund']
 
@@ -215,10 +216,10 @@ class BackTestTrade:
         # 转换列表名
         data = data.rename(columns={'timestamp': '成交时间', 'SecurityID': '代码', 'Symbol': '名称', 'trade_type': '操作',
                                     'price_order': '委托价', 'price_deal': '成交价', 'Volume': '成交量', 'fund_deal': '成交金额',
-                                     'fee': '手续费', 'tax': '印花税', 'other_fee': '其他杂费', 'security_holding': '证券余额',
+                                    'fee': '手续费', 'tax': '印花税', 'other_fee': '其他杂费', 'security_holding': '证券余额',
                                     'hap_fund': '发生金额', 'remain_fund': '现金余额'})
 
-        data.to_csv(csv_path+'/交割单.csv', sep=",", index=False, encoding='gbk')
+        data.to_csv(csv_path + '/交割单.csv', sep=",", index=False, encoding='gbk')
 
         return 'generate trade csv success!'
 
@@ -301,13 +302,13 @@ class BackTestTrade:
     @staticmethod
     def http_post(send_dic, urlencode_name, url):
         jdata = json.dumps(send_dic)  # json格式化编码
-        jdata = urllib.urlencode({urlencode_name: jdata})  # urlencode编码
-        req = urllib2.Request(url, jdata)  # 生成页面请求的完整数据
-        res = urllib2.urlopen(req)  # 发送页面请求
+        jdata = urllib.parse.urlencode({urlencode_name: jdata})  # urlencode编码
+        req = urllib.request.Request(url, jdata)  # 生成页面请求的完整数据
+        res = urllib.request.urlopen(req)  # 发送页面请求
         temp_res = res.read()  # 返回结果，把list结果处理为字符串显示
         return temp_res
 
 
 if __name__ == '__main__':
     trade = Trade()
-    print "".isdigit()
+    print("".isdigit())
